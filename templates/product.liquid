@@ -26,9 +26,9 @@
   <input type="number" id="Quantity" name="quantity" value="1" min="1">
 
 {% if product.available %}
-<button style="disabled" type="submit" name="add" id="AddToCart">Add to cart</button>
-{% else %}
 <button class="cart-button" type="submit" name="add" id="AddToCart">Add to cart</button>
+{% else %}
+<button class="cart-button-no-stock" type="submit" name="add" id="AddToCart" disabled="disabled">Add to cart</button>
 {% endif %}
 </form>
 <div>{{ product.description }}</div>
