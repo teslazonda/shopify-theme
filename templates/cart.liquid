@@ -40,13 +40,27 @@
       <button type="submit" name="checkout">Checkout</button>
     </div>
       <div>
-        <input type="checkbox" id="order-notes" name="order-notes"
-         checked>
+        <input type="checkbox" id="order-notes"  name="order-notes" onclick="dynInput(this);" />
           <label for="order-notes">Add instructions</label>
-          <input type="text" id="name" name="name">
+          <p id="insertinputs"></p>
       </div>
   </form>
 {% else %}
   <h2>cart</h2>
   Cart is empty
 {% endif %}
+<script type="text/javascript">
+ function dynInput(cbox) {
+  if (cbox.checked) {
+    var input = document.createElement("input");
+    input.type = "text";
+    input.id = "order-instructions"
+    var div = document.createElement("div");
+    div.id = cbox.name;
+    div.appendChild(input);
+    document.getElementById("insertinputs").appendChild(div);
+  } else {
+    document.getElementById("order-instructions").remove();
+  }
+}
+</script>
