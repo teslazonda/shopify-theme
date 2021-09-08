@@ -65,8 +65,8 @@
 
     const textInput = document.querySelector('#update');
     textInput.addEventListener('click', (event) => {
+      event.preventDefault();
       //console.log(event);
-      console.log('test'); // this is NOT printing
       let textField = document.getElementById("order-instructions").value;
       console.log(textField);
       // jQuery.post('/cart/update.js', {note: `${textField}`});
