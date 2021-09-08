@@ -36,7 +36,7 @@
     </table>
     <div>
       <p>sub total : {{ cart.total_price | money }}</p>
-      <button type="submit" name="update">Update</button>
+      <button type="submit" name="update" id="update">Update</button>
       <button type="submit" name="checkout">Checkout</button>
     </div>
       <div>
@@ -52,15 +52,30 @@
 <script type="text/javascript">
  function dynInput(cbox) {
   if (cbox.checked) {
-    var input = document.createElement("input");
+    var input = document.createElement("textarea");
     input.type = "text";
     input.id = "order-instructions"
+    input.placeholder = 'The crispier the better'
+    input.value = ''
     var div = document.createElement("div");
     div.id = cbox.name;
     div.appendChild(input);
     document.getElementById("insertinputs").appendChild(div);
+
+
+    const textInput = document.querySelector('#update');
+    textInput.addEventListener('click', (event) => {
+      //console.log(event);
+      console.log('test'); // this is NOT printing
+      let textField = document.getElementById("order-instructions").value;
+      console.log(textField);
+      // jQuery.post('/cart/update.js', {note: `${textField}`});
+});
   } else {
     document.getElementById("order-instructions").remove();
   }
 }
+
+// have a query selector on the update button that updates the cart object with the new note
+
 </script>
