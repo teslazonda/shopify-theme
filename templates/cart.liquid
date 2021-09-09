@@ -40,9 +40,9 @@
       <button type="submit" name="checkout">Checkout</button>
     </div>
     <div>
-      <input type="checkbox" id="order-notes"  name="order-notes" onclick="showTextArea()" />
+      <input type="checkbox" id="order-notes"  name="order-notes" onclick="showTextArea();" />
       <label for="order-notes">Add instructions</label>
-      <textarea style="display: none;" name="note" id="order-instructions">{{ cart.note }}</textarea>
+      <textarea placeholder="The crispier the better!" style="display: none;" name="note" id="order-instructions">{{ cart.note }}</textarea>
     </div>
   </form>
   {% else %}
