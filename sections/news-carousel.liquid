@@ -1,12 +1,59 @@
 {% schema %}
-{
-  "name" : "news-carousel",
-  "blocks": [
+  {
+  "name": "news-carousel",
+  "tag": "section",
+  "class": "news-carousel",
+    "settings": [
     {
-      "name": "campaign"
+      "type": "text",
+      "id": "title",
+      "label": "news-carousel"
     }
-  ]
-}
+  ],
+  "blocks": [
+     {
+       "name": "Title",
+       "type": "news-carousel",
+       "settings": [
+         {
+           "type": "text",
+           "id": "title-carousel",
+           "label": "Title"
+         },
+        {
+           "type": "textarea",
+           "id": "description-carousel",
+           "label": "Description"
+         }
+       ]
+     },
+
+     {
+       "name": "new-product"
+       "type": "news-carousel",
+       "settings": [
+         {
+           "type": "textarea",
+           "id": "description-carousel",
+           "label": "Description"
+         }
+       ]
+     },
+
+     {
+       "name": "news"
+       "type": "news-carousel",
+       "settings": [
+         {
+           "type": "checkbox",
+           "id": "checkbox-carousel",
+           "label": "Description"
+         }
+       ]
+
+     }
+   ]
+  }
 {% endschema %}
 
 {% stylesheet %}
