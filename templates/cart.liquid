@@ -36,11 +36,36 @@
     </table>
     <div>
       <p>sub total : {{ cart.total_price | money }}</p>
-      <button type="submit" name="update">Update</button>
+      <button type="submit" name="update" id="update">Update</button>
       <button type="submit" name="checkout">Checkout</button>
     </div>
+    <div>
+      <input type="checkbox" id="order-notes"  name="order-notes" onclick="showTextArea();" />
+      <label for="order-notes">Add instructions</label>
+      <textarea placeholder="The crispier the better!" style="display: none;" name="note" id="order-instructions">{{ cart.note }}</textarea>
+    </div>
   </form>
-{% else %}
+  {% else %}
   <h2>cart</h2>
   Cart is empty
 {% endif %}
+<script type="text/javascript">
+  const showTextArea = () => {
+    const dom = document.getElementById("order-instructions")
+    if (dom.style.display !== "none") {
+      dom.style.display = "none"
+    } else {
+      dom.style.display = "block"
+    }
+  };
+
+  const textInput = document.querySelector('#update');
+  textInput.addEventListener('click', (event) => {
+    event.preventDefault();
+    let textField = document.getElementById("order-instructions").value;
+    window.alert('Order Insctructions added!');
+    console.log(textField);
+    console.log({{ cart.note }});
+  })
+
+</script>

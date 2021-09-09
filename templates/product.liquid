@@ -24,6 +24,39 @@
   {{ current_variant.price | money }}
   <label for="Quantity">quantity</label>
   <input type="number" id="Quantity" name="quantity" value="1" min="1">
-  <button type="submit" name="add" id="AddToCart">Add to cart</button>
+
+{% if current_variant.available %}
+<button class="cart-button" type="submit" name="add" id="AddToCart">Add to cart</button>
+{% else %}
+<button class="cart-button-no-stock" type="submit" name="add" id="AddToCart" disabled="disabled">Add to cart</button>
+{% endif %}
 </form>
 <div>{{ product.description }}</div>
+<script type="text/javascript">
+let addToCartForm = document.querySelector('form');
+addToCartForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  let formData = {
+    'items': [{
+    'id': {{ product.selected_or_first_available_variant.id }},
+    'quantity': parseInt(document.querySelector('#Quantity').value, 10),
+    'properties': {
+      'cart_index': {{ cart.item_count }}
+      }
+    }]
+  };
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(response => {
+    return response.json();
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+})
+</script>
