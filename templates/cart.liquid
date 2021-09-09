@@ -39,43 +39,46 @@
       <button type="submit" name="update" id="update">Update</button>
       <button type="submit" name="checkout">Checkout</button>
     </div>
-      <div>
-        <input type="checkbox" id="order-notes"  name="order-notes" onclick="dynInput(this);" />
-          <label for="order-notes">Add instructions</label>
-          <p id="insertinputs"></p>
-      </div>
+    <div>
+      <input type="checkbox" id="order-notes"  name="order-notes" onclick="dynInput(this);" />
+      <label for="order-notes">Add instructions</label>
+      <p id="insertinputs"></p>
+    </div>
   </form>
-{% else %}
+  {% else %}
   <h2>cart</h2>
   Cart is empty
 {% endif %}
 <script type="text/javascript">
- function dynInput(cbox) {
-  if (cbox.checked) {
-    var input = document.createElement("textarea");
-    input.type = "text";
-    input.id = "order-instructions"
-    input.placeholder = 'The crispier the better'
-    input.value = ''
-    var div = document.createElement("div");
-    div.id = cbox.name;
-    div.appendChild(input);
-    document.getElementById("insertinputs").appendChild(div);
+  function dynInput(cbox) {
+    if (cbox.checked) {
+      var input = document.createElement("textarea");
+      input.type = "text";
+      input.id = "order-instructions"
+      input.placeholder = "The crispier the better"
+      input.name = 'note'
+      input.value = ''
+      var div = document.createElement("div");
+      div.id = cbox.name;
+      div.appendChild(input);
+      document.getElementById("insertinputs").appendChild(div);
 
 
-    const textInput = document.querySelector('#update');
-    textInput.addEventListener('click', (event) => {
-      event.preventDefault();
-      //console.log(event);
-      let textField = document.getElementById("order-instructions").value;
-      console.log(textField);
-      // jQuery.post('/cart/update.js', {note: `${textField}`});
-});
-  } else {
-    document.getElementById("order-instructions").remove();
+      const textInput = document.querySelector('#update');
+      textInput.addEventListener('click', (event) => {
+        event.preventDefault();
+        //console.log(event);
+        let textField = document.getElementById("order-instructions").value;
+        console.log(textField);
+        //jQuery.post('/cart/update.js', {note: `${textField}`});
+        // how to show cart attributes for tes?
+        console.log({{ cart.note }});
+      });
+    } else {
+      document.getElementById("order-instructions").remove();
+    }
   }
-}
 
-// have a query selector on the update button that updates the cart object with the new note
+  // have a query selector on the update button that updates the cart object with the new note
 
 </script>
