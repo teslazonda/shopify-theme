@@ -1,4 +1,4 @@
-<h3>{{ section.blocks[0].settings.campaign-title }}</h3>
+<h3 style="color: red;">{{ section.blocks[0].settings.campaign-title }}</h3>
 <p>{{ section.blocks[0].settings.campaign-description }}</p>
 {% schema %}
  {
@@ -75,9 +75,6 @@
 {% endschema %}
 
 {% stylesheet %}
-#campaign-title {
-  color: red;
-}
 {% endstylesheet %}
 
 {% javascript %}
