@@ -1,59 +1,87 @@
+<h3>{{ section.settings.news-carousel-text }}</h3>
+<p>{{ section.settings.news-carousel-textarea }}</p>
 {% schema %}
-  {
-  "name": "news-carousel",
-  "tag": "section",
-  "class": "news-carousel",
-    "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "news-carousel"
-    }
-  ],
-  "blocks": [
+ {
+   "name": "news-carousel",
+   "settings": [
      {
-       "name": "Title",
-       "type": "news-carousel",
-       "settings": [
-         {
-           "type": "text",
-           "id": "title-carousel",
-           "label": "Title"
-         },
-        {
-           "type": "textarea",
-           "id": "description-carousel",
-           "label": "Description"
-         }
-       ]
+       "type": "text",
+       "label": "news carousel",
+       "id": "news-carousel-text"
      },
-
      {
-       "name": "new-product"
-       "type": "news-carousel",
-       "settings": [
-         {
-           "type": "textarea",
-           "id": "description-carousel",
-           "label": "Description"
-         }
-       ]
-     },
-
-     {
-       "name": "news"
-       "type": "news-carousel",
-       "settings": [
-         {
-           "type": "checkbox",
-           "id": "checkbox-carousel",
-           "label": "Description"
-         }
-       ]
-
+       "type": "textarea",
+       "label": "news textarea",
+       "id": "news-carousel-textarea"
      }
+   ],
+   "blocks": [
+     {
+       "type": "campaign",
+       "name": "campaign",
+       "settings": [
+         {
+          "type": "text",
+          "label": "Title",
+          "id": "campaign-title"
+         },
+         {
+          "type": "textarea",
+          "label": "Description",
+          "id": "campaign-description"
+         },
+         {
+          "type": "checkbox",
+          "label": "Featured",
+          "id": "campaign-featured"
+         }
+       ]
+     },
+     {
+       "type": "new-product",
+       "name": "new-product",
+       "settings": [
+         {
+          "type": "text",
+          "label": "Title",
+          "id": "new-product-title"
+         },
+         {
+          "type": "textarea",
+          "label": "Description",
+          "id": "new-product-description"
+         },
+         {
+          "type": "checkbox",
+          "label": "Featured",
+          "id": "new-product-featured"
+         }
+       ]
+     },
+     {
+       "type": "news",
+       "name": "news",
+       "settings": [
+         {
+          "type": "text",
+          "label": "Title",
+          "id": "news-product-title"
+         },
+         {
+          "type": "textarea",
+          "label": "Description",
+          "id": "news-product-description"
+         },
+         {
+          "type": "checkbox",
+          "label": "Featured",
+          "id": "news-product-featured"
+         }
+       ]
+     }
+
    ]
-  }
+ }
 {% endschema %}
 
 {% stylesheet %}

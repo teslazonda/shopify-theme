@@ -1,3 +1,4 @@
+{{ content_for_index }}
 {% for product in collections.frontpage.products limit:4 %}
   <div>
     <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
@@ -7,4 +8,15 @@
       <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
     </a>
   </div>
+  <div class="rte">
+    {{ page.content }}
+    {% section 'news-carousel' %}
+  </div>
 {% endfor %}
+<script src="/assets/application.js" async>
+var myPopup = new smq.Popup({
+    title: 'Popup Window',
+    innerHtml: 'Inner HTML Content'
+});
+myPopup.show():
+</script>
