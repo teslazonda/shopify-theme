@@ -40,9 +40,9 @@
       <button type="submit" name="checkout">Checkout</button>
     </div>
     <div>
-      <input type="checkbox" id="order-notes"  name="order-notes" onclick="dynInput(this);" />
+      <input type="checkbox" id="order-notes"  name="order-notes" onclick="showTextArea()" />
       <label for="order-notes">Add instructions</label>
-      <p id="insertinputs"></p>
+      <textarea style="display: none;" name="note" id="order-instructions">{{ cart.note }}</textarea>
     </div>
   </form>
   {% else %}
@@ -50,35 +50,22 @@
   Cart is empty
 {% endif %}
 <script type="text/javascript">
-  function dynInput(cbox) {
-    if (cbox.checked) {
-      var input = document.createElement("textarea");
-      input.type = "text";
-      input.id = "order-instructions"
-      input.placeholder = "The crispier the better"
-      input.name = 'note'
-      input.value = ''
-      var div = document.createElement("div");
-      div.id = cbox.name;
-      div.appendChild(input);
-      document.getElementById("insertinputs").appendChild(div);
-
-
-      const textInput = document.querySelector('#update');
-      textInput.addEventListener('click', (event) => {
-        event.preventDefault();
-        //console.log(event);
-        let textField = document.getElementById("order-instructions").value;
-        console.log(textField);
-        //jQuery.post('/cart/update.js', {note: `${textField}`});
-        // how to show cart attributes for tes?
-        console.log({{ cart.note }});
-      });
+  const showTextArea = () => {
+    const dom = document.getElementById("order-instructions")
+    if (dom.style.display !== "none") {
+      dom.style.display = "none"
     } else {
-      document.getElementById("order-instructions").remove();
+      dom.style.display = "block"
     }
-  }
+  };
 
-  // have a query selector on the update button that updates the cart object with the new note
+  const textInput = document.querySelector('#update');
+  textInput.addEventListener('click', (event) => {
+    event.preventDefault();
+    let textField = document.getElementById("order-instructions").value;
+    window.alert('Order Insctructions added!');
+    console.log(textField);
+    console.log({{ cart.note }});
+  })
 
 </script>
