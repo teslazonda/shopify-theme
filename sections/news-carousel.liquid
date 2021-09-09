@@ -1,5 +1,9 @@
 <h3 style="color: red;">{{ section.blocks[0].settings.campaign-title }}</h3>
 <p>{{ section.blocks[0].settings.campaign-description }}</p>
+<h3 style="color: blue;">{{ section.blocks[1].settings.new-product-title }}</h3>
+<p>{{ section.blocks[1].settings.new-product-description }}</p>
+<h3 style="color: green;">{{ section.blocks[2].settings.news-title }}</h3>
+<p>{{ section.blocks[2].settings.news-description }}</p>
 {% schema %}
  {
    "name": "news-carousel",
@@ -55,21 +59,20 @@
          {
           "type": "text",
           "label": "Title",
-          "id": "news-product-title"
+          "id": "news-title"
          },
          {
           "type": "textarea",
           "label": "Description",
-          "id": "news-product-description"
+          "id": "news-description"
          },
          {
           "type": "checkbox",
           "label": "Featured",
-          "id": "news-product-featured"
+          "id": "news-featured"
          }
        ]
      }
-
    ]
  }
 {% endschema %}
