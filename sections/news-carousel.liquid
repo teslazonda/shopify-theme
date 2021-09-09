@@ -1,3 +1,5 @@
+<h3>{{ section.blocks[0].settings.campaign-title }}</h3>
+<p>{{ section.blocks[0].settings.campaign-description }}</p>
 {% schema %}
  {
    "name": "news-carousel",
@@ -73,6 +75,9 @@
 {% endschema %}
 
 {% stylesheet %}
+#campaign-title {
+  color: red;
+}
 {% endstylesheet %}
 
 {% javascript %}
