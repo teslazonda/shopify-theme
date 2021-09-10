@@ -1,8 +1,18 @@
-order by featured then iterate put a conditional on the style to change color
-{% assign sorted_blocks = section.blocks | sort: "settings.featured" | reverse %}
-{% for block in sorted_blocks %}
-<h3 class="{{ block.type }}-color">{{ block.settings.title }}</h3>
-<p>{{ block.settings.description }}</p>
+{% comment %} iterated over twice because sort (line 3 and 4) wasn't working for me {% endcomment %}
+
+{% comment %} {% assign sorted_blocks = section.blocks | map: "settings" | sort: "title" %}
+{{ sorted_blocks }} {% endcomment %}
+{% for block in section.blocks %}
+  {% if block.settings.featured %}
+    <h3 class="{{ block.type }}-color">{{ block.settings.title }}</h3>
+    <p>{{ block.settings.description }}</p>
+  {% endif %}
+{% endfor %}
+{% for block in section.blocks %}
+  {% unless block.settings.featured %}
+    <h3 class="{{ block.type }}-color">{{ block.settings.title }}</h3>
+    <p>{{ block.settings.description }}</p>
+  {% endunless %}
 {% endfor %}
 
 {% schema %}
