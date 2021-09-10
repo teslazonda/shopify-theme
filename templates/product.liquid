@@ -33,8 +33,9 @@
 </form>
 <div>{{ product.description }}</div>
 <script type="text/javascript" async>
-  let product_quantity = "Current stock: " + "{{ current_variant.inventory_quantity }}"
-  alert(product_quantity);
+let product_quantity = "Current stock: " + "{{ current_variant.inventory_quantity }}"
+let cart_index_num = "{{ cart.item_count }}"
+alert(product_quantity + "\nCart index: "+ cart_index_num);
 let addToCartForm = document.querySelector('form');
 addToCartForm.addEventListener('submit', (event) => {
   event.preventDefault();
