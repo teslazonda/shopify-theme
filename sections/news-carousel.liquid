@@ -1,9 +1,10 @@
-<h3 style="color: red;">{{ section.blocks[0].settings.campaign-title }}</h3>
-<p>{{ section.blocks[0].settings.campaign-description }}</p>
-<h3 style="color: blue;">{{ section.blocks[1].settings.new-product-title }}</h3>
-<p>{{ section.blocks[1].settings.new-product-description }}</p>
-<h3 style="color: green;">{{ section.blocks[2].settings.news-title }}</h3>
-<p>{{ section.blocks[2].settings.news-description }}</p>
+order by featured then iterate put a conditional on the style to change color
+{% assign sorted_blocks = section.blocks | sort: "settings.featured" | reverse %}
+{% for block in sorted_blocks %}
+<h3 class="{{ block.type }}-color">{{ block.settings.title }}</h3>
+<p>{{ block.settings.description }}</p>
+{% endfor %}
+
 {% schema %}
  {
    "name": "news-carousel",
@@ -17,17 +18,17 @@
          {
           "type": "text",
           "label": "Title",
-          "id": "campaign-title"
+          "id": "title"
          },
          {
           "type": "textarea",
           "label": "Description",
-          "id": "campaign-description"
+          "id": "description"
          },
          {
           "type": "checkbox",
           "label": "Featured",
-          "id": "campaign-featured"
+          "id": "featured"
          }
        ]
      },
@@ -38,17 +39,17 @@
          {
           "type": "text",
           "label": "Title",
-          "id": "new-product-title"
+          "id": "title"
          },
          {
           "type": "textarea",
           "label": "Description",
-          "id": "new-product-description"
+          "id": "description"
          },
          {
           "type": "checkbox",
           "label": "Featured",
-          "id": "new-product-featured"
+          "id": "featured"
          }
        ]
      },
@@ -59,17 +60,17 @@
          {
           "type": "text",
           "label": "Title",
-          "id": "news-title"
+          "id": "title"
          },
          {
           "type": "textarea",
           "label": "Description",
-          "id": "news-description"
+          "id": "description"
          },
          {
           "type": "checkbox",
           "label": "Featured",
-          "id": "news-featured"
+          "id": "featured"
          }
        ]
      }
@@ -78,6 +79,16 @@
 {% endschema %}
 
 {% stylesheet %}
+.campaign-color {
+  color: red;
+}
+.new-product-color {
+  color: blue;
+}
+
+.news-color {
+  color: green;
+}
 {% endstylesheet %}
 
 {% javascript %}
