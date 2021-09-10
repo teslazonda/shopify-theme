@@ -1,0 +1,104 @@
+{% comment %} iterated over twice because sort (line 3 and 4) wasn't working for me {% endcomment %}
+
+{% comment %} {% assign sorted_blocks = section.blocks | map: "settings" | sort: "title" %}
+{{ sorted_blocks }} {% endcomment %}
+{% for block in section.blocks %}
+  {% if block.settings.featured %}
+    <h3 class="{{ block.type }}-color">{{ block.settings.title }}</h3>
+    <p>{{ block.settings.description }}</p>
+  {% endif %}
+{% endfor %}
+{% for block in section.blocks %}
+  {% unless block.settings.featured %}
+    <h3 class="{{ block.type }}-color">{{ block.settings.title }}</h3>
+    <p>{{ block.settings.description }}</p>
+  {% endunless %}
+{% endfor %}
+
+{% schema %}
+{
+  "name": "news-carousel",
+  "settings": [
+  ],
+  "blocks": [
+    {
+      "type": "campaign",
+      "name": "campaign",
+      "settings": [
+        {
+          "type": "text",
+          "label": "Title",
+          "id": "title"
+        },
+        {
+          "type": "textarea",
+          "label": "Description",
+          "id": "description"
+        },
+        {
+          "type": "checkbox",
+          "label": "Featured",
+          "id": "featured"
+        }
+      ]
+    },
+    {
+      "type": "new-product",
+      "name": "new-product",
+      "settings": [
+        {
+          "type": "text",
+          "label": "Title",
+          "id": "title"
+        },
+        {
+          "type": "textarea",
+          "label": "Description",
+          "id": "description"
+        },
+        {
+          "type": "checkbox",
+          "label": "Featured",
+          "id": "featured"
+        }
+      ]
+    },
+    {
+      "type": "news",
+      "name": "news",
+      "settings": [
+        {
+          "type": "text",
+          "label": "Title",
+          "id": "title"
+        },
+        {
+          "type": "textarea",
+          "label": "Description",
+          "id": "description"
+        },
+        {
+          "type": "checkbox",
+          "label": "Featured",
+          "id": "featured"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+.campaign-color {
+  color: red;
+}
+.new-product-color {
+  color: blue;
+}
+.news-color {
+  color: green;
+}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
