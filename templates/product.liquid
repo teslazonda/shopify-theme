@@ -32,7 +32,9 @@
 {% endif %}
 </form>
 <div>{{ product.description }}</div>
-<script type="text/javascript">
+<script type="text/javascript" async>
+  let product_quantity = "Current stock: " + "{{ current_variant.inventory_quantity }}"
+  alert(product_quantity);
 let addToCartForm = document.querySelector('form');
 addToCartForm.addEventListener('submit', (event) => {
   event.preventDefault();
