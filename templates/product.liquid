@@ -64,6 +64,6 @@
   let productQuantity = "Current stock: " + "{{ current_variant.inventory_quantity }}"
   totalItems = {{ cart.item_count }}
   // Below we iterate over cart items, passing the name of the item of the cart, and the cart_index to a popup.
-  let cartIndexes = "{% for item in cart.items %}Item: {{ item.title}} cart_index: {{ item.properties.cart_index }}\n{% endfor %}"
+  let cartIndexes = "{% for item in cart.items %}Item:  {{ item.title}} x{{ item.quantity }} cart_index: {{ item.properties.cart_index }}\n{% endfor %}"
   alert(productQuantity + "\nTotal Items in Cart: " + totalItems + "\nCart: \n"+ cartIndexes);
 </script>
