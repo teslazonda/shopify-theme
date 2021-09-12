@@ -1,7 +1,7 @@
 // Put your application javascript here
 const axios = require('axios').default; // using axios for API calls
 
-async function CheckValue() {
+async function checkValue() {
   const { data: checkResponse } = await axios.get('https://aa429cff3713812e45b04ef7d83c3c30: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@teslazonda.myshopify.com/admin/api/2021-07/products/6958978400416/metafields.json');
   value = checkResponse['metafields'][0]['value'];
   idNumber = checkResponse['metafields'][0]['id'];
@@ -9,7 +9,7 @@ async function CheckValue() {
 }
 // A funtion to delete metafields for bacon product for testing
 async function deleteMetafield() {
-  const metafieldIdToDeleteArray = await CheckValue();
+  const metafieldIdToDeleteArray = await checkValue();
   deleteId = metafieldIdToDeleteArray[1]
   const { data: response } = await axios.delete(`https://aa429cff3713812e45b04ef7d83c3c30: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@teslazonda.myshopify.com/admin/api/2021-07/products/6958978400416/metafields/${deleteId}.json`) // chance number before .json to whatever the current id is.
   console.log(response)
@@ -42,7 +42,7 @@ async function getMetafieldCount() {
     } else {
       console.log("Making PUT request to update metafield value because metafield already exists");
       // Get the metafield id and value to use for the PUT request
-      let metafieldArray = await CheckValue();
+      let metafieldArray = await checkValue();
       // is an array [metafieldID, metafieldValue]
       console.log('This is the metafield ID and metafield value we using to update the metafield value:', metafieldArray)
       // axios metafield PUT to adds one to the metafield value
@@ -68,4 +68,4 @@ catch (error) {
 }
 getMetafieldCount();
 // deleteMetafield();
-// Comment out getMetafieldCount() and use above function to delte metafield for testing
+// Comment out getMetafieldCount(), comment in deleteMetafield(), save, to delte metafield for testing
