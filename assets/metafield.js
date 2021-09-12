@@ -1,52 +1,11 @@
 // Put your application javascript here
-// require('dotenv').config();
-/*Retrieve a count of metafields that belong to a Product resource
-
-GET / admin / api / 2021 - 07 / products / 632910392 / metafields / count.json
-response:
-
-HTTP/1.1 200 OK
-{
-  "count": 2
-}
-*/
-// If above return a count of zero, then we should vreate a new metafield
-
-
-/* Create a new metafield for a Product resource
-
-POST /admin/api/2021-07/products/632910392/metafields.json
-response:
-
-{
-  "metafield": {
-    "namespace": "inventory",
-    "key": "test",
-    "value": 0,
-    "type": "integer"
-  }
-}
-*/
-const axios = require('axios').default; // with return {count: 0} if there are no metafields
-// axios.get('https://aa429cff3713812e45b04ef7d83c3c30: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@teslazonda.myshopify.com/admin/api/2021-07/products/6958978400416/metafields/count.json')
-//   .then(function (response) {
-//     // handle success
-//     console.log(response.data);
-//     return response.data
-//   })
-//   .catch(function (error) {
-//     // handle error
-//     console.log(error);
-//   })
-//   .then(function () {
-//     // always executed
-//   });
+const axios = require('axios').default; // using axios for API calls
 
 async function axiosCheckValue() {
-const { data: checkResponse } = await axios.get('https://aa429cff3713812e45b04ef7d83c3c30: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@teslazonda.myshopify.com/admin/api/2021-07/products/6958978400416/metafields.json');
-value = checkResponse['metafields'][0]['value'];
-idNumber = checkResponse['metafields'][0]['id'];
-return [value, idNumber]
+  const { data: checkResponse } = await axios.get('https://aa429cff3713812e45b04ef7d83c3c30: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@teslazonda.myshopify.com/admin/api/2021-07/products/6958978400416/metafields.json');
+  value = checkResponse['metafields'][0]['value'];
+  idNumber = checkResponse['metafields'][0]['id'];
+  return [value, idNumber]
 }
 // A funtion to delete metafields for bacon product for testing
 async function axiosDeleteMetafield() {
@@ -58,17 +17,17 @@ async function axiosDeleteMetafield() {
 }
 async function axiosNewMetafield() {
   const { data: postResponse } = await axios.post('https://aa429cff3713812e45b04ef7d83c3c30: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@teslazonda.myshopify.com/admin/api/2021-07/products/6958978400416/metafields.json', {
-    "metafield": {
-      "namespace": "global",
-      "key": "test",
-      "value": 0,
-      "type": "number_integer"
-    }
-  })
-  console.log(postResponse)
-  let metafieldID = postResponse['metafield']['id']
-  let metafieldValue = postResponse['metafield']['value']
-  return [metafieldID, metafieldValue]
+  "metafield": {
+    "namespace": "global",
+    "key": "test",
+    "value": 0,
+    "type": "number_integer"
+  }
+})
+console.log(postResponse)
+let metafieldID = postResponse['metafield']['id']
+let metafieldValue = postResponse['metafield']['value']
+return [metafieldID, metafieldValue]
 }
 async function axiosGetMetafieldCount() {
   try {
@@ -86,23 +45,25 @@ async function axiosGetMetafieldCount() {
       let metafieldArray = await axiosCheckValue();
       // is an array [metafieldID, metafieldValue]
       console.log('This is the metafield ID and metafield value we using to update the metafield value:', metafieldArray)
-      // axios metafield PUT to add one to the value
-       metaValue = metafieldArray[0]
-       metaID = metafieldArray[1]
-       metaValue += 1
+      // axios metafield PUT to adds one to the metafield value
+      metaValue = metafieldArray[0]
+      metaID = metafieldArray[1]
+      metaValue += 1
       const { data: putResponse } = await axios.put(`https://aa429cff3713812e45b04ef7d83c3c30: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@teslazonda.myshopify.com/admin/api/2021-07/products/6958978400416/metafields/${metaID}.json`, {
-        "metafield": {
-          "id": metaID,
-          "value": metaValue,
-          "type": "number_integer"
-        }
-      })
-      console.log(putResponse);
-    }
-  }
-
-  catch (error) {
-    console.log(error);
+      "metafield": {
+        "id": metaID,
+        "value": metaValue,
+        "type": "number_integer"
+      }
+    })
+    console.log(putResponse);
   }
 }
+
+catch (error) {
+  console.log(error);
+}
+}
 axiosGetMetafieldCount();
+// axiosDeleteMetafield();
+// Comment out axiosGetMetafieldCount() and use above function to delte metafield for testing
